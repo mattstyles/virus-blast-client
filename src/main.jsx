@@ -9,6 +9,9 @@ import MyComponent from 'myComponent'
 import ACTIONS from 'constants/actions'
 import appStore from 'stores/appStore'
 
+import { appState } from 'immreact'
+
+window.store = appStore
 
 class App extends React.Component {
     constructor() {
@@ -42,20 +45,43 @@ class App extends React.Component {
                         return !/^\./.test( file )
                     })
                     .forEach( file => {
-                        console.log( path.relative( data.cwd, file.path ) )
+                        // console.log( path.relative( data.cwd, file.path ) )
                     })
             })
     }
 
     render() {
+        console.log( 'main::render' )
+
+        let cwd = appStore.getCWD()
+
+        let files = appStore.getFiles()
+        let items = !files
+            ? <li>Empty</li>
+            : files.map( file => {
+                return (
+                    <li>{ path.relative( cwd, file.deref().get( 'path' ) ) }</li>
+                )
+            })
+
         return (
             <div className="container">
                 <h1>Hello React</h1>
                 <input ref="input" type="text" placeholder="path" />
                 <button onClick={ this.onClick.bind( this ) }>Fetch path</button>
+                <ul>
+                    { items }
+                </ul>
             </div>
         )
     }
 }
 
-React.render( <App />, document.body )
+
+function render() {
+    React.render( <App />, document.body )
+}
+
+render()
+
+appState.state.on( 'swap', render )
