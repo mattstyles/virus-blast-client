@@ -7,6 +7,8 @@ window.appState = appState
 
 class AppStore {
     constructor() {
+        // @TODO this should probably be private so that access is
+        // restricted via the dispatcher
         this.state = appState.create( 'appStore' )
 
         dispatcher.register( dispatch => {

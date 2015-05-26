@@ -5,19 +5,26 @@ import path from 'path'
 import React from 'react'
 
 import dispatcher from 'dispatchers/appDispatcher'
-import MyComponent from 'myComponent'
 import ACTIONS from 'constants/actions'
 import appStore from 'stores/appStore'
 
 import { appState } from 'immreact'
-import immstruct from 'immstruct'
 
-window.immstruct = immstruct
+import StatusBar from 'status/status'
+import File from 'file/file'
+import Directory from 'file/directory'
+import Files from 'file/files'
+
+// @TODO remove
 window.store = appStore
 
 class App extends React.Component {
     constructor() {
         super()
+    }
+
+    componentDidMount() {
+        this.onClick()
     }
 
     onClick( event ) {
@@ -39,7 +46,6 @@ class App extends React.Component {
                     payload: data
                 })
 
-                console.log( 'from path route' )
                 data.files
                     .filter( file => {
                         return !/^\./.test( file )
@@ -58,20 +64,20 @@ class App extends React.Component {
         let files = appStore.getFiles()
         let items = !files
             ? <li>Empty</li>
-            : files.map( file => {
-                return (
-                    <li>{ path.relative( cwd, file.deref().get( 'path' ) ) }</li>
-                )
-            })
+            : files
+                .map( file => {
+                    return file.get( 'isDirectory' )
+                        ? <Directory file={ file.deref() } />
+                        : <File file={ file.deref() } />
+                })
 
         return (
             <div className="container">
+                <StatusBar cwd={ appStore.getCWD() } />
                 <h1>Hello React</h1>
                 <input ref="input" type="text" placeholder="path" />
                 <button onClick={ this.onClick.bind( this ) }>Fetch path</button>
-                <ul>
-                    { items }
-                </ul>
+                <Files />
             </div>
         )
     }
