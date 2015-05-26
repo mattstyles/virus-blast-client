@@ -1,4 +1,11 @@
 
+
+/**
+ * @TODO class inheritance not currently implemented
+ */
+
+
+
 import React from 'react'
 import classnames from 'classnames'
 

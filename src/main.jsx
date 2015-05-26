@@ -33,10 +33,12 @@ class App extends React.Component {
     render() {
         console.log( 'main::render' )
         return (
-            <div className="container">
+            <div className="container u-fit-fix">
                 <StatusBar cwd={ appStore.getCWD() } />
-                <Menu />
-                <Files />
+                <div className="main">
+                    <Menu />
+                    <Files />
+                </div>
             </div>
         )
     }

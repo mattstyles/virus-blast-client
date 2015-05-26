@@ -11,22 +11,6 @@ let icons = {
 }
 
 
-class MenuHome extends React.Component {
-    constructor( props ) {
-        super( props )
-    }
-
-    onClick( event ) {
-        dispatcher.dispatch({
-            type: ACTIONS.HOME
-        })
-    }
-
-    render() {
-        return <button onClick={ this.onClick.bind( this ) }>HOME</button>
-    }
-}
-
 class MenuButton extends React.Component {
     constructor( props ) {
         super( props )
@@ -72,10 +56,10 @@ export default class Menu extends React.Component {
 
     render() {
         return (
-            <nav className="Menu u-pullLeft">
+            <nav className="Menu">
 
-                <input ref="input" type="text" placeholder="path" />
-                <button onClick={ this.onClick.bind( this ) }>Fetch path</button>
+                <input ref="input" className="Menu-search" type="text" placeholder="path" />
+                <button className="Menu-searchBtn" onClick={ this.onClick.bind( this ) }>Fetch path</button>
                 <ul>
                     <MenuButton action={ ACTIONS.HOME } />
                     <MenuButton action={ ACTIONS.SAVE } />

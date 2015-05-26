@@ -18,11 +18,16 @@ export default class File extends Component {
         }
     }
 
+    get shortPath() {
+        return path.relative( this.props.cwd, this.props.file.path )
+    }
+
     onClick( event ) {
         var animate = function() {
             let health = this.cursor.get( 'health' )
 
             if ( health === 100 ) {
+                console.log( 'My health has replenished', this.shortPath )
                 return
             }
 
@@ -44,7 +49,7 @@ export default class File extends Component {
         return (
             <li className={ classes } onClick={ this.onClick.bind( this ) }>
                 <div>
-                    <span>{ path.relative( this.props.cwd, this.props.file.path ) }</span>
+                    <span>{ this.shortPath }</span>
                     <span>{ this.cursor.get( 'health' ) }</span>
                 </div>
             </li>

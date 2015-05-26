@@ -1,16 +1,27 @@
 
 .Files {
-    padding-top: 20px;
-    margin-left: 250px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 20px;
     width: 320px;
+    border-top: 1px solid @--color-white40;
+    border-left: 1px solid @--color-white40;
+    border-right: 1px solid @--color-white40;
 }
 .Files ul {
     list-style-type: none;
     padding: 0px;
     margin: 0px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 .Files-title {
     font-size: 13px;
+    line-height: 15px;
+    margin-top: 0px;
+    margin-bottom: 20px;
     text-transform: uppercase;
     color: @--color-black40;
 }
