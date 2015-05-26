@@ -11,8 +11,6 @@ import appStore from 'stores/appStore'
 import { appState } from 'immreact'
 
 import StatusBar from 'status/status'
-import File from 'file/file'
-import Directory from 'file/directory'
 import Files from 'file/files'
 import Menu from 'menu/menu'
 

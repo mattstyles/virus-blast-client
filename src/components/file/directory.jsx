@@ -1,14 +1,14 @@
 
 import path from 'path'
 
+import { Component } from 'immreact'
 import React from 'react'
+import classnames from 'classnames'
 import dispatcher from 'dispatchers/appDispatcher'
 import ACTIONS from 'constants/actions'
 
-import Base from './base'
 
-
-export default class Directory extends Base {
+export default class Directory extends Component {
     static propTypes = {
         file: React.PropTypes.object,
         cwd: React.PropTypes.string
@@ -27,12 +27,14 @@ export default class Directory extends Base {
     }
 
     render() {
+        let classes = classnames({
+            File: true,
+            'File-isDirectory': this.props.file.isDirectory
+        })
         return (
-            <Base
-                file={ this.props.file }
-                onClick={ this.onClick.bind( this ) }>
+            <li className={ classes } onClick={ this.onClick.bind( this ) }>
                 <div>{ path.relative( this.props.cwd, this.props.file.path ) }</div>
-            </Base>
+            </li>
         )
     }
 }

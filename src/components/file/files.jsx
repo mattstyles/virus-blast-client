@@ -2,13 +2,14 @@
 import path from 'path'
 
 import React from 'react'
+import { Component } from 'immreact'
 import appStore from 'stores/appStore'
 
 import File from './file'
 import Directory from './directory'
 
 
-export default class Files extends React.Component {
+export default class Files extends Component {
     constructor( props ) {
         super( props )
     }
