@@ -56,7 +56,7 @@ class AppStore {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                path: path.normalize( this.getCWD(), newpath )
+                path: this.getCWD() ? path.resolve( this.getCWD(), newpath ) : './'
             })
         })
             .then( res => res.json() )
