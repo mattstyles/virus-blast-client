@@ -19,7 +19,6 @@ export default class Directory extends Component {
     }
 
     onClick( event ) {
-        console.log( 'directory::onclick' )
         dispatcher.dispatch({
             type: ACTIONS.PATH,
             payload: this.props.file.path
@@ -29,7 +28,7 @@ export default class Directory extends Component {
     render() {
         let classes = classnames({
             File: true,
-            'File-isDirectory': this.props.file.isDirectory
+            'File--isDirectory': this.props.file.isDirectory
         })
         return (
             <li className={ classes } onClick={ this.onClick.bind( this ) }>
