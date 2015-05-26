@@ -14,6 +14,7 @@ import StatusBar from 'status/status'
 import File from 'file/file'
 import Directory from 'file/directory'
 import Files from 'file/files'
+import Menu from 'menu/menu'
 
 
 // @TODO remove
@@ -31,47 +32,18 @@ class App extends React.Component {
         })
     }
 
-    onClick( event ) {
-        let input = this.refs.input.getDOMNode().value
-
-        fetch( '/files', {
-            method: 'post',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                path: input.length ? input : './'
-            })
-        })
-            .then( res => res.json() )
-            .then( data => {
-                dispatcher.dispatch({
-                    type: ACTIONS.FILES,
-                    payload: data
-                })
-
-                data.files
-                    .filter( file => {
-                        return !/^\./.test( file )
-                    })
-                    .forEach( file => {
-                        // console.log( path.relative( data.cwd, file.path ) )
-                    })
-            })
-    }
-
     render() {
         console.log( 'main::render' )
         return (
             <div className="container">
                 <StatusBar cwd={ appStore.getCWD() } />
-                <input ref="input" type="text" placeholder="path" />
-                <button onClick={ this.onClick.bind( this ) }>Fetch path</button>
+                <Menu />
                 <Files />
             </div>
         )
     }
 }
+
 
 
 function render() {

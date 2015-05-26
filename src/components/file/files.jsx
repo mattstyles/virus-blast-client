@@ -29,7 +29,7 @@ export default class Files extends React.Component {
                 .map( file => {
                     return file.isDirectory
                         ? <Directory key={ file.path } file={ file } cwd={ appStore.getCWD() } />
-                        : <File key={ file.path } file={ file } cwd={ appStore.getCWD() }  />
+                        : <File key={ file.path } file={ file } cwd={ appStore.getCWD() } />
                 })
 
         return (

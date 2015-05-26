@@ -6,5 +6,11 @@ export default keyMirror({
     FILES: null,
 
     // Triggered to request a new file path
-    PATH: null
+    PATH: null,
+
+    // Triggered to request the home path
+    HOME: null,
+
+    SAVE: null,
+    LOAD: null
 })
