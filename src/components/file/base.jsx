@@ -2,9 +2,18 @@
 import React from 'react'
 import classnames from 'classnames'
 
+function onClick( event ) {
+    throw new Error( 'FileBase::onClick -- abstract' )
+}
+
 export default class FileBase extends React.Component {
     static propTypes = {
-        file: React.PropTypes.object
+        file: React.PropTypes.object,
+        onClick: React.PropTypes.func
+    }
+
+    static defaultProps = {
+        onClick: onClick
     }
 
     constructor( props ) {
@@ -17,7 +26,7 @@ export default class FileBase extends React.Component {
             'File-isDirectory': this.props.file.get( 'isDirectory' )
         })
         return (
-            <li className={ classes }>
+            <li className={ classes } onClick={ this.props.onClick }>
                 { this.props.children }
             </li>
         )

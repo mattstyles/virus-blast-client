@@ -14,6 +14,12 @@ class AppStore {
         dispatcher.register( dispatch => {
             if ( dispatch.type === ACTIONS.FILES ) {
                 this.update( dispatch.payload )
+                return
+            }
+
+            if ( dispatch.type === ACTIONS.PATH ) {
+                this.fetchPath( dispatch.payload )
+                return
             }
         })
     }
@@ -36,6 +42,28 @@ class AppStore {
         let cwd = this.state.cursor().get( 'cwd' )
 
         return cwd || ''
+    }
+
+    /**
+     * Fetches a new files path
+     */
+    fetchPath( path ) {
+        fetch( '/files', {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                path: path
+            })
+        })
+            .then( res => res.json() )
+            .then( data => {
+                dispatcher.dispatch({
+                    type: ACTIONS.FILES,
+                    payload: data
+                })
+            })
     }
 }
 

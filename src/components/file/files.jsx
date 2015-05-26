@@ -18,8 +18,8 @@ export default class Files extends React.Component {
             : files
                 .map( file => {
                     return file.get( 'isDirectory' )
-                        ? <Directory file={ file.deref() } />
-                        : <File file={ file.deref() } />
+                        ? <Directory key={ file.get( 'path' ) } file={ file.deref() } />
+                        : <File key={ file.get( 'path' ) } file={ file.deref() } />
                 })
 
         return (
