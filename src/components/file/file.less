@@ -1,9 +1,11 @@
+@--File-padding: 20px;
 
 .Files {
     display: flex;
     flex-direction: column;
+    flex: 1;
     box-sizing: border-box;
-    padding: 20px;
+    padding: @--File-padding 0px;
     width: 320px;
     border-top: 1px solid @--color-white40;
     border-left: 1px solid @--color-white40;
@@ -24,12 +26,14 @@
     margin-bottom: 20px;
     text-transform: uppercase;
     color: @--color-black40;
+    padding: 0px @--File-padding;
 }
 
 .File {
     color: @--color-black20;
     font-size: 19px;
     line-height: 32px;
+    padding: 0px @--File-padding;
 
     &:hover {
         cursor: pointer;

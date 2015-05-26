@@ -45,21 +45,27 @@ export default class Menu extends React.Component {
         super( props )
     }
 
-    onClick( event ) {
-        let input = this.refs.input.getDOMNode().value
+    onInputChange( event ) {
 
-        dispatcher.dispatch({
-            type: ACTIONS.PATH,
-            payload: input.length ? input : './'
-        })
+        if ( event.charCode === 13 ) {
+            dispatcher.dispatch({
+                type: ACTIONS.PATH,
+                payload: event.target.value.length ? event.target.value : './'
+            })
+        }
     }
 
     render() {
         return (
             <nav className="Menu">
 
-                <input ref="input" className="Menu-search" type="text" placeholder="path" />
-                <button className="Menu-searchBtn" onClick={ this.onClick.bind( this ) }>Fetch path</button>
+                <input
+                    ref="input"
+                    className="Menu-search"
+                    type="text"
+                    placeholder="path"
+                    onKeyPress={ this.onInputChange.bind( this )} />
+
                 <ul>
                     <MenuButton action={ ACTIONS.HOME } />
                     <MenuButton action={ ACTIONS.SAVE } />
