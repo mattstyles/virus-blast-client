@@ -10,7 +10,9 @@ import ACTIONS from 'constants/actions'
 import appStore from 'stores/appStore'
 
 import { appState } from 'immreact'
+import immstruct from 'immstruct'
 
+window.immstruct = immstruct
 window.store = appStore
 
 class App extends React.Component {
@@ -30,9 +32,7 @@ class App extends React.Component {
                 path: input.length ? input : './'
             })
         })
-            .then( res => {
-                return res.json()
-            } )
+            .then( res => res.json() )
             .then( data => {
                 dispatcher.dispatch({
                     type: ACTIONS.FILES,

@@ -7,18 +7,10 @@ window.appState = appState
 
 class AppStore {
     constructor() {
-        appState.state.cursor().update( cursor => {
-            return cursor.merge({
-                appStore: {}
-            })
-        })
-
-        this.state = appState.state.reference( 'appStore' )
+        this.state = appState.create( 'appStore' )
 
         dispatcher.register( dispatch => {
             if ( dispatch.type === ACTIONS.FILES ) {
-                console.log( 'Store heard the file update' )
-                console.log( dispatch.payload )
                 this.update( dispatch.payload )
             }
         })
