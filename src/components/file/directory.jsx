@@ -1,11 +1,19 @@
 
+import path from 'path'
+
 import React from 'react'
 import dispatcher from 'dispatchers/appDispatcher'
 import ACTIONS from 'constants/actions'
+
 import Base from './base'
 
 
 export default class Directory extends Base {
+    static propTypes = {
+        file: React.PropTypes.object,
+        cwd: React.PropTypes.string
+    }
+
     constructor( props ) {
         super( props )
     }
@@ -14,7 +22,7 @@ export default class Directory extends Base {
         console.log( 'directory::onclick' )
         dispatcher.dispatch({
             type: ACTIONS.PATH,
-            payload: this.props.file.get( 'path' )
+            payload: this.props.file.path
         })
     }
 
@@ -23,7 +31,7 @@ export default class Directory extends Base {
             <Base
                 file={ this.props.file }
                 onClick={ this.onClick.bind( this ) }>
-                <div>{ this.props.file.get( 'path' ) }</div>
+                <div>{ path.relative( this.props.cwd, this.props.file.path ) }</div>
             </Base>
         )
     }

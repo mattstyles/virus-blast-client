@@ -1,4 +1,6 @@
 
+import path from 'path'
+
 import { appState } from 'immreact'
 import ACTIONS from 'constants/actions'
 import dispatcher from 'dispatchers/appDispatcher'
@@ -47,14 +49,14 @@ class AppStore {
     /**
      * Fetches a new files path
      */
-    fetchPath( path ) {
+    fetchPath( newpath ) {
         fetch( '/files', {
             method: 'post',
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                path: path
+                path: path.normalize( this.getCWD(), newpath )
             })
         })
             .then( res => res.json() )

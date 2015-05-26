@@ -23,7 +23,7 @@ export default class FileBase extends React.Component {
     render() {
         let classes = classnames({
             File: true,
-            'File-isDirectory': this.props.file.get( 'isDirectory' )
+            'File-isDirectory': this.props.file.isDirectory
         })
         return (
             <li className={ classes } onClick={ this.props.onClick }>
