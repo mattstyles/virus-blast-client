@@ -36,9 +36,12 @@ export default class Files extends React.Component {
                 })
 
         return (
-            <ul className="Files">
-                { items }
-            </ul>
+            <div className="Files">
+                <h2 className="Files-title">Files</h2>
+                <ul>
+                    { items }
+                </ul>
+            </div>
         )
     }
 }
