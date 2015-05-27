@@ -1,5 +1,5 @@
 
-// import './utils/font'
+import './utils/font'
 
 import path from 'path'
 import React from 'react'

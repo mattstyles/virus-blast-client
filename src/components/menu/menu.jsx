@@ -5,9 +5,21 @@ import ACTIONS from 'constants/actions'
 import dispatcher from 'dispatchers/appDispatcher'
 
 let icons = {
-    [ ACTIONS.HOME ]: 'HOME',
-    [ ACTIONS.SAVE ]: 'SAVE',
-    [ ACTIONS.LOAD ]: 'LOAD'
+    [ ACTIONS.HOME ]: 'Home',
+    [ ACTIONS.SAVE ]: 'Save',
+    [ ACTIONS.LOAD ]: 'Load'
+}
+
+class MenuTitle extends React.Component {
+    constructor( props ) {
+        super( props )
+    }
+
+    render() {
+        return (
+            <li><h3 className="Menu-title">{ this.props.name }</h3></li>
+        )
+    }
 }
 
 
@@ -67,6 +79,7 @@ export default class Menu extends React.Component {
                     onKeyPress={ this.onInputChange.bind( this )} />
 
                 <ul>
+                    <MenuTitle name="main" />
                     <MenuButton action={ ACTIONS.HOME } />
                     <MenuButton action={ ACTIONS.SAVE } />
                     <MenuButton action={ ACTIONS.LOAD } />

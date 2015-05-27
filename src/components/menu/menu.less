@@ -1,8 +1,10 @@
-
+@--Menu-padding: 20px;
+@--Menu-borderTabSize: 4px;
 
 .Menu {
     width: 230px;
     background: @--color-dkblue;
+    padding-top: @--Menu-padding * 2;
 }
 
 .Menu ul {
@@ -14,19 +16,21 @@
 .Menu-btn {
     border: none;
     background: transparent;
-    color: @--color-grey10;
+    color: @--color-grey20;
     font-size: 15px;
+    font-weight: 400;
     line-height: 34px;
     text-align: left;
-    padding-left: 20px;
-    border-left: 4px solid transparent;
+    text-transform: uppercase;
+    padding-left: @--Menu-padding;
+    border-left: @--Menu-borderTabSize solid transparent;
     transition: padding .133s ease-out, border .133s ease-out;
 
     &:hover {
         cursor: pointer;
-        color: @--color-grey20;
-        border-left: 4px solid @--color-grey20;
-        padding-left: 28px;
+        color: @--color-white30;
+        border-left: @--Menu-borderTabSize solid @--color-grey20;
+        padding-left: @--Menu-padding + ( @--Menu-borderTabSize * 2 );
     }
 }
 
@@ -41,4 +45,16 @@
 
 .Menu-searchBtn {
     margin-bottom: 20px;
+}
+
+.Menu-title {
+    padding-left: @--Menu-padding + @--Menu-borderTabSize;
+    font-size: 27px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin-top: @--Menu-padding;
+    margin-bottom: @--Menu-padding / 2;
+    color: @--color-black40;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
