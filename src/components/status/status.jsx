@@ -4,11 +4,13 @@ import { appState } from 'immreact'
 
 export default class StatusBar extends React.Component {
     static propTypes = {
-        cwd: React.PropTypes.string
+        cwd: React.PropTypes.string,
+        points: React.PropTypes.number
     }
 
     static defaultProps = {
-        cwd: ''
+        cwd: '',
+        points: 0
     }
 
     constructor( props ) {
@@ -18,7 +20,8 @@ export default class StatusBar extends React.Component {
     render() {
         return (
             <div className="Status u-stretchX">
-                { this.props.cwd }
+                <span>{ this.props.cwd }</span>
+                <span className="Status-pts">{ this.props.points } pts</span>
             </div>
         )
     }

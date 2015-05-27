@@ -1,11 +1,21 @@
+@--Status-height: 40px;
 
 .Status {
+    position: relative;
     box-sizing: border-box;
-    height: 40px;
-    min-height: 40px;
+    height: @--Status-height;
+    min-height: @--Status-height;
     font-size: 13px;
-    line-height: 40px;
+    line-height: @--Status-height;
     text-align: center;
     background: @--color-dkblue;
     color: @--color-grey20;
+}
+
+.Status-pts {
+    position: absolute;
+    line-height: @--Status-height;
+    font-size: 22px;
+    color: @--color-white20;
+    right: 44px;
 }

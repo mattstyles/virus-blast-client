@@ -31,7 +31,7 @@ class App extends React.Component {
     }
 
     render() {
-        console.log( 'main::render' )
+        //console.log( 'main::render' )
         return (
             <div className="container u-fit-fix">
                 <Menu />
