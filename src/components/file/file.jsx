@@ -6,7 +6,7 @@ import React from 'react'
 import { Component } from 'immreact'
 import classnames from 'classnames'
 
-// Set a custom frame rate to slow down degeneration
+
 var raf = new AnimationFrame()
 
 export default class File extends Component {

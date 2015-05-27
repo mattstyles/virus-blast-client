@@ -34,11 +34,13 @@ class App extends React.Component {
         console.log( 'main::render' )
         return (
             <div className="container u-fit-fix">
-                <StatusBar cwd={ appStore.getCWD() } />
-                <div className="main">
-                    <Menu />
-                    <Files />
-                </div>
+                <Menu />
+                <article className="main">
+                    <StatusBar cwd={ appStore.getCWD() } />
+                    <section className="main-section">
+                        <Files />
+                    </section>
+                </article>
             </div>
         )
     }
