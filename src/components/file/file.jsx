@@ -2,12 +2,18 @@
 import path from 'path'
 
 import AnimationFrame from 'animation-frame'
-import React from 'react'
+//import React from 'react'
+
+import React from 'react/addons'
 import { Component } from 'immreact'
 import classnames from 'classnames'
 
 import dispatcher from 'dispatchers/appDispatcher'
 import ACTIONS from 'constants/actions'
+
+
+import shouldPureComponentUpdate from 'react-pure-render/function'
+
 
 var raf = new AnimationFrame()
 
@@ -24,6 +30,10 @@ var raf = new AnimationFrame()
  *   - denoted by cursor.get( 'resisted' )
  */
 export default class File extends Component {
+
+
+    shouldComponentUpdate = shouldPureComponentUpdate
+
     constructor( props ) {
         super( props )
 

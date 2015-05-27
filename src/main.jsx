@@ -2,7 +2,8 @@
 import './utils/font'
 
 import path from 'path'
-import React from 'react'
+//import React from 'react'
+import React from 'react/addons'
 
 import dispatcher from 'dispatchers/appDispatcher'
 import ACTIONS from 'constants/actions'
@@ -18,6 +19,7 @@ import Integrity from 'integrity/integrity'
 
 // @TODO remove
 window.store = appStore
+window.React = React
 
 class App extends React.Component {
     constructor() {
@@ -41,7 +43,7 @@ class App extends React.Component {
                         points={ appStore.getPoints() }
                     />
                     <section className="main-section">
-                        <Files />
+                        <Files files={ appStore.getFiles() } />
                         <Integrity corruption={ appStore.getCorruption() } />
                     </section>
                 </article>
@@ -53,9 +55,14 @@ class App extends React.Component {
 
 
 function render() {
+    React.addons.Perf.start()
     React.render( <App />, document.body )
+    React.addons.Perf.stop()
+    React.addons.Perf.printWasted()
 }
 
 render()
+
+window.render = render
 
 appState.state.on( 'swap', render )
