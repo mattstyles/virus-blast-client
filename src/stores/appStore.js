@@ -94,6 +94,13 @@ class AppStore {
     }
 
     /**
+     * Grabs the corruption level
+     */
+    getCorruption() {
+        return this.state.cursor().get( 'corruption' )
+    }
+
+    /**
      * Fetches a new files path
      * @param newpath <String> the path to fetch
      */

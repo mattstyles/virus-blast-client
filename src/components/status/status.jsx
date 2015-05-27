@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { appState } from 'immreact'
 
 export default class StatusBar extends React.Component {
     static propTypes = {

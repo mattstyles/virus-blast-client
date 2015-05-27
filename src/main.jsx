@@ -36,7 +36,10 @@ class App extends React.Component {
             <div className="container u-fit-fix">
                 <Menu />
                 <article className="main">
-                    <StatusBar cwd={ appStore.getCWD() } />
+                    <StatusBar
+                        cwd={ appStore.getCWD() }
+                        points={ appStore.getPoints() }
+                    />
                     <section className="main-section">
                         <Files />
                     </section>
