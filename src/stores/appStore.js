@@ -12,7 +12,10 @@ class AppStore {
     constructor() {
         // @TODO this should probably be private so that access is
         // restricted via the dispatcher
-        this.state = appState.create( 'appStore' )
+        this.state = appState.create( 'appStore', {
+            points: 0,
+            corruption: 0
+        })
 
         dispatcher.register( dispatch => {
             if ( dispatch.type === ACTIONS.FILES ) {
@@ -38,6 +41,18 @@ class AppStore {
             if ( dispatch.type === ACTIONS.LOAD ) {
                 this.load()
                 return
+            }
+
+            if ( dispatch.type === ACTIONS.POINTS ) {
+                this.update({
+                    points: this.state.cursor().get( 'points' ) + dispatch.payload.points
+                })
+            }
+
+            if ( dispatch.type === ACTIONS.CORRUPT ) {
+                this.update({
+                    corruption: this.state.cursor().get( 'corruption' ) + dispatch.payload.corruption
+                })
             }
         })
     }
@@ -69,6 +84,13 @@ class AppStore {
         let cwd = this.state.cursor().get( 'cwd' )
 
         return cwd || null
+    }
+
+    /**
+     * Grabs the points
+     */
+    getPoints() {
+        return this.state.cursor().get( 'points' )
     }
 
     /**

@@ -11,6 +11,15 @@ export default keyMirror({
     // Triggered to request the home path
     HOME: null,
 
+    // Triggered to save state
     SAVE: null,
-    LOAD: null
+
+    // Triggered to load state
+    LOAD: null,
+
+    // Triggered to award points
+    POINTS: null,
+
+    // Triggered when a file corrupts
+    CORRUPT: null
 })

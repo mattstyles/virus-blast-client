@@ -35,7 +35,8 @@ export default class File extends Component {
             repaired: false,
             resisted: Math.random() > .7 ? true : false,
             corrupted: false,
-            corrupting: null
+            corrupting: null,
+            collected: false
         }
 
         // Handle to the animation frame whilst repairing
@@ -44,6 +45,7 @@ export default class File extends Component {
         // Handle to the animation frame whilst corrupting
         this.corruptingFrame = null
 
+        // Triggers initialisation
         this.init()
 
         // This feels a bit smelly - the frames should be held in
@@ -101,6 +103,13 @@ export default class File extends Component {
         this.update({
             corrupted: true
         })
+
+        dispatcher.dispatch({
+            type: ACTIONS.CORRUPT,
+            payload: {
+                corruption: this.props.file.size
+            }
+        })
     }
 
     /**
@@ -130,6 +139,24 @@ export default class File extends Component {
             repaired: true
         })
         this.frame = null
+
+        this.collect()
+    }
+
+    /**
+     * Manages collecting rewards from a file
+     */
+    collect() {
+        this.update({
+            collected: true
+        })
+
+        dispatcher.dispatch({
+            type: ACTIONS.POINTS,
+            payload: {
+                points: this.points || 10
+            }
+        })
     }
 
 
@@ -139,9 +166,14 @@ export default class File extends Component {
             return
         }
 
+        if ( this.cursor.get( 'collected' ) ) {
+            return
+        }
+
         // if resisted award some points
         if ( this.cursor.get( 'resisted' ) ) {
             console.log( 'I resisted the virus, have a bonus' )
+            this.collect()
             return
         }
 
