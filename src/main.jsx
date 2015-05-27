@@ -13,6 +13,7 @@ import { appState } from 'immreact'
 import StatusBar from 'status/status'
 import Files from 'file/files'
 import Menu from 'menu/menu'
+import Integrity from 'integrity/integrity'
 
 
 // @TODO remove
@@ -31,7 +32,6 @@ class App extends React.Component {
     }
 
     render() {
-        //console.log( 'main::render' )
         return (
             <div className="container u-fit-fix">
                 <Menu />
@@ -42,6 +42,7 @@ class App extends React.Component {
                     />
                     <section className="main-section">
                         <Files />
+                        <Integrity corruption={ appStore.getCorruption() } />
                     </section>
                 </article>
             </div>

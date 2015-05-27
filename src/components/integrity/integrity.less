@@ -1,0 +1,42 @@
+
+.Integrity {
+    position: relative;
+    box-sizing: border-box;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: @--color-white;
+}
+
+.Integrity-title {
+    font-size: 13px;
+    line-height: 15px;
+    margin-top: @--File-padding;
+    margin-bottom: @--File-padding;
+    text-transform: uppercase;
+    color: @--color-black40;
+    padding: 0px @--File-padding;
+}
+
+.Integrity-barWrapper {
+    flex: 1;
+    position: relative;
+    padding: @--File-padding;
+}
+
+.Integrity-barInner {
+    position: absolute;
+    top: @--File-padding;
+    left: @--File-padding;
+    right: @--File-padding;
+    bottom: @--File-padding;
+}
+
+.Integrity-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background: red;
+}

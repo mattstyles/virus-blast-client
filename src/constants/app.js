@@ -1,7 +1,9 @@
 
 import keyMirror from 'keymirror'
 
-export default keyMirror({
-    // Localstorage variable for saving state
-    LS: null
-})
+export default {
+    // Local storage variable name
+    LS: 'virus-blast',
+
+    MAX_CORRUPTION_LEVEL: 1000
+}
