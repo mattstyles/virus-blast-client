@@ -3,6 +3,7 @@ import path from 'path'
 
 import { appState } from 'immreact'
 import ACTIONS from 'constants/actions'
+import APPCONFIG from 'constants/app'
 import dispatcher from 'dispatchers/appDispatcher'
 
 window.appState = appState
@@ -26,6 +27,16 @@ class AppStore {
 
             if ( dispatch.type === ACTIONS.HOME ) {
                 this.fetchHome()
+                return
+            }
+
+            if ( dispatch.type === ACTIONS.SAVE ) {
+                this.save()
+                return
+            }
+
+            if ( dispatch.type === ACTIONS.LOAD ) {
+                this.load()
                 return
             }
         })
@@ -103,6 +114,38 @@ class AppStore {
                     payload: data
                 })
             })
+    }
+
+    /**
+     * Saves the current app state to local storage
+     */
+    save() {
+        try {
+            window.localStorage.setItem( APPCONFIG.LS, JSON.stringify( appState.state.cursor().toJSON() ) )
+        } catch ( err ) {
+            console.error( 'Error saving to local storage' )
+            console.error( err )
+            return
+        }
+
+        console.log( 'saved' )
+    }
+
+    /**
+     * Loads the currently saved state from local storage
+     */
+    load() {
+        try {
+            appState.state.cursor().update( cursor => {
+                return cursor.merge( JSON.parse( window.localStorage.getItem( APPCONFIG.LS ) ) )
+            })
+        } catch( err ) {
+            console.error( 'Error loading from local storage' )
+            console.error( err )
+            return
+        }
+
+        console.log( 'loaded' )
     }
 }
 

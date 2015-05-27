@@ -6,6 +6,8 @@ import React from 'react'
 import { Component } from 'immreact'
 import classnames from 'classnames'
 
+import dispatcher from 'dispatchers/appDispatcher'
+import ACTIONS from 'constants/actions'
 
 var raf = new AnimationFrame()
 
@@ -32,7 +34,8 @@ export default class File extends Component {
             chance: Math.random(),
             repaired: false,
             resisted: Math.random() > .7 ? true : false,
-            corrupted: false
+            corrupted: false,
+            corrupting: null
         }
 
         // Handle to the animation frame whilst repairing
@@ -40,9 +43,24 @@ export default class File extends Component {
 
         // Handle to the animation frame whilst corrupting
         this.corruptingFrame = null
+
+        this.init()
+
+        // This feels a bit smelly - the frames should be held in
+        // state somehow and automatically update on load
+        dispatcher.register( dispatch => {
+            if ( dispatch.type === ACTIONS.LOAD ) {
+                this.init()
+            }
+        })
     }
 
-    componentDidMount() {
+    init() {
+        if ( this.corruptingFrame ) {
+            raf.cancel( this.corruptingFrame )
+            this.corruptingFrame = null
+        }
+
         if ( !this.cursor.get( 'repaired' ) &&
              !this.cursor.get( 'resisted' ) &&
              !this.cursor.get( 'corrupted' ) ) {
@@ -61,7 +79,7 @@ export default class File extends Component {
      */
     corrupt() {
         let health = this.cursor.get( 'health' )
-        let degrade = Math.random() * .5 > this.cursor.get( 'chance' ) ? --health : health
+        let degrade = Math.random() > this.cursor.get( 'chance' ) ? --health : health
 
         if ( health < 0 ) {
             this.onCorrupted()
